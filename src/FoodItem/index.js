@@ -1,22 +1,45 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const FoodItem = (props) => {
+class FoodItem extends Component {
 
-  const List = props.food_list.map(function(x) {
-    console.log(props.food_list);
-    return(
-      <div key={x.id}>
-        <h1>Hello</h1>
-        <img src={x.url} alt="Food iamge" />
-      </div>
-    );
+  render() {
 
-  })
+    const List = this.props.food_list.map ( foodItem =>
+      <div key={foodItem.id}>
+          <h1>{foodItem.name}</h1>
+          <img src={foodItem.url} alt="Food iamge" />
+        </div>
+    )
 
     return(
       <div>
-        <List />
+        {List}
       </div>
     );
+  }
 }
+
 export default FoodItem;
+
+/***************************
+OTHER EXAMPLES
+****************************/
+
+/*
+const FoodItem = (props) => {
+
+  const List = props.food_list.map ( foodItem =>
+
+      <li key={foodItem.id}>
+        <h1>{foodItem.name}</h1>
+        <img src={foodItem.url} alt="Food iamge" />
+      </li>
+  )
+
+    return(
+      <ul>
+        {List}
+      </ul>
+    );
+}
+*/
