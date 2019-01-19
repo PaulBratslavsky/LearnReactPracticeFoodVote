@@ -8,13 +8,17 @@ let food_list = [
   {id: 3, name: 'foo bar foo', votes: 0, url: 'https://static.pexels.com/photos/46239/salmon-dish-food-meal-46239.jpeg'}
 ];
 
+
 const App = () => {
-    return(
-      <div>
-        <h1>My App</h1>
-        <FoodItem food_list={food_list}/>
-      </div>
-    );
+  
+  const foodList = food_list.map( item => <FoodItem foodItem={item}/> );
+
+  return(
+    <div>
+      <h1>My App</h1>
+        {foodList}
+    </div>  
+  )
 }
 
 

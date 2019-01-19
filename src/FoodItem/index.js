@@ -1,23 +1,22 @@
 import React, { Component } from 'react';
 
 class FoodItem extends Component {
+  
 
   constructor(props) {
       super(props);
       this.state = {
         votes: 0
       };
-      this.onButtonClickUpVote = this.onButtonClickUpVote.bind(this)
-      this.onButtonClickDownVote = this.onButtonClickDownVote.bind(this)
     }
 
-  onButtonClickUpVote() {
+  onButtonClickUpVote = () => {
     this.setState({
       votes: this.state.votes + 1
     });
   };
 
-  onButtonClickDownVote() {
+  onButtonClickDownVote = () => {
     this.setState({
       votes: this.state.votes - 1
     });
@@ -45,22 +44,16 @@ class FoodItem extends Component {
       borderRadius: '50%'
     };
 
-    const List = this.props.food_list.map ( foodItem =>
-      <div key={foodItem.id} style={foodItemStyle}>
-          <h1>{foodItem.name}</h1>
-          <img src={foodItem.url} style={imageItemStyle} alt="Food iamge" />
-          <p>Vote Up</p>
-          <button onClick={this.onButtonClickUpVote}>+1</button>
-          <p>Vote Down</p>
-          <button onClick={this.onButtonClickDownVote}>-1</button>
-          <p>Total Votes: {this.state.votes}</p>
-      </div>
-    )
-
     return(
-      <div>
-        {List}
-      </div>
+      <div key={this.props.foodItem.id} style={foodItemStyle}>
+        <h1>{this.props.foodItem.name}</h1>
+        <img src={this.props.foodItem.url} style={imageItemStyle} alt="Food iamge" />
+        <p>Vote Up</p>
+        <button onClick={this.onButtonClickUpVote}>+1</button>
+        <p>Vote Down</p>
+        <button onClick={this.onButtonClickDownVote}>-1</button>
+        <p>Total Votes: {this.state.votes}</p>
+    </div>
     );
   }
 }
