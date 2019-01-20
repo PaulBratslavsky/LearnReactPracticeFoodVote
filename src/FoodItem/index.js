@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 
+
 class FoodItem extends Component {
   
 
   constructor(props) {
-      super(props);
-      this.state = {
-        votes: 0
-      };
-    }
+
+    super(props);
+    this.state = {
+      votes: this.props.foodItem.votes
+    };
+  }
 
   onButtonClickUpVote = () => {
     this.setState({
