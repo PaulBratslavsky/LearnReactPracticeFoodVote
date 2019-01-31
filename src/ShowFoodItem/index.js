@@ -1,14 +1,18 @@
 import React from 'react';
-import FoodItem from '../FoodItem';
+import FoodItemList from '../FoodItemList';
 
 const ShowFoodItem = (props) => {
     
-    const showFoodList = props.food_list.map( item => <FoodItem foodItem={item}/> );
-
+    let showFoodListSorted = props.food_list.sort( (a,b) => {
+        console.log(a.id)
+        return b.votes - a.votes; 
+    } );
+    
+    showFoodListSorted = props.food_list.map( item => <FoodItemList key={item.id} foodItem={item} handleUpVoteChangeData={props.handleUpVoteChangeData} handleDownVoteChangeData={props.handleDownVoteChangeData}/>);
+    
     return(
         <div>
-            <h2>This is from ShowFoodItem</h2>
-            {showFoodList}
+            {showFoodListSorted}
         </div>
     );
 }

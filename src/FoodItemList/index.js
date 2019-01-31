@@ -1,27 +1,13 @@
 import React, { Component } from 'react';
 
+class FoodItemList extends Component {
 
-class FoodItem extends Component {
-  
-
-  constructor(props) {
-
-    super(props);
-    this.state = {
-      votes: this.props.foodItem.votes
-    };
-  }
-
-  onButtonClickUpVote = () => {
-    this.setState({
-      votes: this.state.votes + 1
-    });
+  onButtonClickUpVote = (props) => {
+    this.props.handleUpVoteChangeData(this.props.foodItem.id);
   };
 
-  onButtonClickDownVote = () => {
-    this.setState({
-      votes: this.state.votes - 1
-    });
+  onButtonClickDownVote = (props) => {
+    this.props.handleDownVoteChangeData(this.props.foodItem.id);
   };
 
 
@@ -54,13 +40,13 @@ class FoodItem extends Component {
         <button onClick={this.onButtonClickUpVote}>+1</button>
         <p>Vote Down</p>
         <button onClick={this.onButtonClickDownVote}>-1</button>
-        <p>Total Votes: {this.state.votes}</p>
+        <p>Total Votes: {this.props.foodItem.votes}</p>
     </div>
     );
   }
 }
 
-export default FoodItem;
+export default FoodItemList;
 
 /***************************
 OTHER EXAMPLES

@@ -1,23 +1,37 @@
 import React, { Component } from 'react';
 import ShowFoodItem from '../ShowFoodItem';
+import { data } from '../data.js';
+console.log(data);
 
 class AddFoodItem extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            id: new Date(),
+            id: 0,
             name: '',
             url: '',
             votes: 0,
 
-            foodItemList: [
-                {id: 1, name: 'foo', votes: 3, url: 'https://static.pexels.com/photos/461198/pexels-photo-461198.jpeg'},
-                {id: 2, name: 'foo bar', votes: 1, url: 'https://static.pexels.com/photos/376464/pexels-photo-376464.jpeg'},
-                {id: 3, name: 'foo bar foo', votes: 6, url: 'https://static.pexels.com/photos/46239/salmon-dish-food-meal-46239.jpeg'}
-            ]
+            foodItemList: data
         }
 
+    }
+
+    handleUpVoteChangeData = (id) => {
+        data.filter( item => {
+            if ( item.id === id ) {
+                console.log(`Food Item with ID: ${id} was upvoted by one vote.`);
+            }
+        });
+    }
+
+    handleDownVoteChangeData = (id) => {
+        data.filter( item => {
+            if ( item.id === id ) {
+                console.log(`Food Item with ID: ${id} was downvotes by one vote.`);
+            }
+        });
     }
 
     handleChangeOnInputName = (event) => {
@@ -26,6 +40,7 @@ class AddFoodItem extends Component {
         });
     }
 
+    
     handleChangeOnInputUrl = (event) => {
         this.setState({
             url: event.target.value
@@ -37,7 +52,7 @@ class AddFoodItem extends Component {
         console.log("Submit Button Clicked");
 
         let data = { 
-                id: this.state.id,
+                id: Math.floor((Math.random() * 100000) + 1),
                 name: this.state.name,
                 url: this.state.url,
                 votes: this.state.votes,
@@ -45,14 +60,13 @@ class AddFoodItem extends Component {
         
         const NewFoodListArray = this.state.foodItemList ;
         NewFoodListArray.push(data);
-        console.log(data, "This is data");
-
+        
         this.setState({
             foodItemList: NewFoodListArray
         });
 
         this.setState(
-            {
+            {   
                 name: '',
                 url: ''
             }
@@ -70,7 +84,12 @@ class AddFoodItem extends Component {
                     <button type="submit">Add</button>
                     
                 </form>
-                <ShowFoodItem food_list={this.state.foodItemList} />
+                    <ShowFoodItem 
+                        food_list={this.state.foodItemList} 
+                        handleUpVoteChangeData={this.handleUpVoteChangeData}
+                        handleDownVoteChangeData={this.handleDownVoteChangeData}
+
+                    />
             </div>
         );
     }
