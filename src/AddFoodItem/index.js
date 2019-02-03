@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ShowFoodItem from '../ShowFoodItem';
 import { data } from '../data.js';
+import uuid from 'uuid';
 console.log(data);
 
 class AddFoodItem extends Component {
@@ -19,19 +20,37 @@ class AddFoodItem extends Component {
     }
 
     handleUpVoteChangeData = (id) => {
-        data.filter( item => {
+        const currentState = this.state.foodItemList;
+        
+        const newArray = currentState.map( ( item ) => {
             if ( item.id === id ) {
-                console.log(`Food Item with ID: ${id} was upvoted by one vote.`);
+                item.votes++;                
             }
+
+            return item;
+
         });
+
+        this.setState({
+            foodItemList: newArray
+        })
     }
 
     handleDownVoteChangeData = (id) => {
-        data.filter( item => {
+        const currentState = this.state.foodItemList;
+        
+        const newArray = currentState.map( ( item, index ) => {
             if ( item.id === id ) {
-                console.log(`Food Item with ID: ${id} was downvotes by one vote.`);
+                item.votes--;                
             }
+
+            return item;
+
         });
+
+        this.setState({
+            foodItemList: newArray
+        })
     }
 
     handleChangeOnInputName = (event) => {
@@ -52,7 +71,7 @@ class AddFoodItem extends Component {
         console.log("Submit Button Clicked");
 
         let data = { 
-                id: Math.floor((Math.random() * 100000) + 1),
+                id: uuid(),
                 name: this.state.name,
                 url: this.state.url,
                 votes: this.state.votes,

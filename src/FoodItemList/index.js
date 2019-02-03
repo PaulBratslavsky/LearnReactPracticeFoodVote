@@ -18,8 +18,8 @@ class FoodItemList extends Component {
       textAlign: 'center',
       margin: 20,
       height: 500,
-      width: 300,
-      padding: 0,
+      width: "1fr",
+      padding: "2rem",
       backgroundColor: 'white',
       WebkitFilter: 'drop-shadow(0px 0px 5px #555)',
       filter: 'drop-shadow(0px 0px 5px #555)'
